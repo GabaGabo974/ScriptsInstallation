@@ -30,13 +30,14 @@ if [ "$choix" = "1" ]; then
     y
 EOF
 
-    BDD="glpi"
-    UTILISATEUR="glpi_user"
-    MDP="mdp"
+    read -p "Entre l'adresse IP de l'hôte de la base de donnée (localhost si en local) : " hote
+    read -p "Entre le nom de la base de données: " bdd
+    read -p "Entre l'utilisateur : " utilisateur
+    read -p "Entre le mot de passe de l'utilisateur: " mdp
 
-    mysql -u root -p'root' -e "CREATE DATABASE $BDD;"
-    mysql -u root -p'root' -e "CREATE USER '$UTILISATEUR'@'localhost' IDENTIFIED BY '$MDP';"
-    mysql -u root -p'root' -e "GRANT ALL PRIVILEGES ON $BDD.* TO '$UTILISATEUR'@'localhost';"
+    mysql -u root -p'root' -e "CREATE DATABASE $bdd;"
+    mysql -u root -p'root' -e "CREATE USER '$utilisateur'@'localhost' IDENTIFIED BY '$mdp';"
+    mysql -u root -p'root' -e "GRANT ALL PRIVILEGES ON $bdd.* TO '$utilisateur'@'$hote';"
     mysql -u root -p'root' -e "FLUSH PRIVILEGES"
 
     #Installation & décompression de GLPI
@@ -48,12 +49,6 @@ EOF
     chmod -R 777 /var/www/html/glpi/files
     rm glpi-10.0.18.tgz -Rf
     systemctl restart apache2
-
-    
-    read -p "Entre l'adresse IP de l'hôte de la base de donnée (localhost si en local) : " hote
-    read -p "Entre le nom de la base de données: " bdd
-    read -p "Entre l'utilisateur : " utilisateur
-    read -p "Entre le mot de passe de l'utilisateur: " mdp
 
 
     # [GLPI] Montage de la base de données
