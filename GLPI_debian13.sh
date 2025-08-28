@@ -43,11 +43,11 @@ EOF
     #Installation & décompression de GLPI
 
     cd /var/www/html
-    wget https://github.com/glpi-project/glpi/releases/download/10.0.18/glpi-10.0.18.tgz
+    wget https://github.com/glpi-project/glpi/releases/download/10.0.19/glpi-10.0.19.tgz
     tar -xzvf glpi-10.0.19.tgz
     chown -R www-data:www-data /var/www/html/glpi/files
     chmod -R 777 /var/www/html/glpi/files
-    rm glpi-10.0.18.tgz -Rf
+    rm glpi-10.0.19.tgz -Rf
     systemctl restart apache2
 
 
@@ -109,8 +109,8 @@ elif [ "$choix" = 3 ]; then
     systemctl restart apache2
 
     cd /var/www/html
-    wget https://github.com/glpi-project/glpi/releases/download/10.0.18/glpi-10.0.18.tgz
-    tar -xzvf glpi-10.0.18.tgz
+    wget https://github.com/glpi-project/glpi/releases/download/10.0.19/glpi-10.0.19.tgz
+    tar -xzvf glpi-10.0.19.tgz
     chown -R www-data:www-data /var/www/html/glpi/files
     chmod -R 777 /var/www/html/glpi/files
     rm glpi-10.0.19.tgz -Rf
