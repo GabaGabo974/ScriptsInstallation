@@ -44,7 +44,7 @@ EOF
 
     cd /var/www/html
     wget https://github.com/glpi-project/glpi/releases/download/10.0.18/glpi-10.0.18.tgz
-    tar -xzvf glpi-10.0.18.tgz
+    tar -xzf glpi-10.0.18.tgz
     chown -R www-data:www-data /var/www/html/glpi/files
     chmod -R 777 /var/www/html/glpi/files
     rm glpi-10.0.18.tgz -Rf
@@ -110,7 +110,7 @@ elif [ "$choix" = 3 ]; then
 
     cd /var/www/html
     wget https://github.com/glpi-project/glpi/releases/download/10.0.18/glpi-10.0.18.tgz
-    tar -xzvf glpi-10.0.18.tgz
+    tar -xzf glpi-10.0.18.tgz
     chown -R www-data:www-data /var/www/html/glpi/files
     chmod -R 777 /var/www/html/glpi/files
     rm glpi-10.0.18.tgz -Rf
