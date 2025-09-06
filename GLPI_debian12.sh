@@ -28,7 +28,7 @@ if [ "$choix" = "1" ]; then
     y
 EOF
 
-    hote="localhost"
+    hote=localhost
     read -p "Entre le nom de la base de données: " bdd
     read -p "Entre l'utilisateur : " utilisateur
     read -p "Entre le mot de passe de l'utilisateur: " mdp
