@@ -31,8 +31,8 @@ EOF
     read -p "Entre l'utilisateur : " utilisateur
     read -p "Entre le mot de passe de l'utilisateur: " mdp
 
-    mysql -u root -p'root' -e "CREATE DATABASE IF NOT EXISTS $bdd;"
-    mysql -u root -p'root' -e "CREATE USERIF NOT EXISTS '$utilisateur'@'localhost' IDENTIFIED BY '$mdp';"
+    mysql -u root -p'root' -e "CREATE DATABASE $bdd;"
+    mysql -u root -p'root' -e "CREATE USER IF NOT EXISTS '$utilisateur'@'$hote' IDENTIFIED BY '$mdp';"
     mysql -u root -p'root' -e "GRANT ALL PRIVILEGES ON $bdd.* TO '$utilisateur'@'$hote';"
     mysql -u root -p'root' -e "FLUSH PRIVILEGES"
 
