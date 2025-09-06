@@ -26,14 +26,13 @@ if [ "$choix" = "1" ]; then
     y
     y
 EOF
-
-    read -p "Entre l'adresse IP de l'hôte de la base de donnée (localhost si en local) : " hote
+    hote="localhost"
     read -p "Entre le nom de la base de données: " bdd
     read -p "Entre l'utilisateur : " utilisateur
     read -p "Entre le mot de passe de l'utilisateur: " mdp
 
-    mysql -u root -p'root' -e "CREATE DATABASE $bdd;"
-    mysql -u root -p'root' -e "CREATE USER '$utilisateur'@'localhost' IDENTIFIED BY '$mdp';"
+    mysql -u root -p'root' -e "CREATE DATABASE IF NOT EXISTS $bdd;"
+    mysql -u root -p'root' -e "CREATE USERIF NOT EXISTS '$utilisateur'@'localhost' IDENTIFIED BY '$mdp';"
     mysql -u root -p'root' -e "GRANT ALL PRIVILEGES ON $bdd.* TO '$utilisateur'@'$hote';"
     mysql -u root -p'root' -e "FLUSH PRIVILEGES"
 
@@ -59,6 +58,9 @@ EOF
     chown -R www-data:www-data /var/www/html/glpi/files/_log
     #cd /var/www/html/glpi/
     #php bin/console system:check_requirements
+    adrip=$(hostname -I | cut -c1-12)
+    echo "Installation terminée, maintenant sur http://$adrip/glpi !"
+
 elif [ "$choix" = 2 ]; then
     apt install -y apache2 mariadb-server
     mysql_secure_installation <<EOF
@@ -78,10 +80,10 @@ EOF
         read -p "Entrez le mot de passe de l'utilisateur : " mdp
         read -p "Entrez le nom de la base de donnee : " bdd
 
-        mysql -u root -p'root' -e "CREATE DATABASE $bdd;"
+        mysql -u root -p'root' -e "CREATE DATABASE IF NOT EXISTS $bdd;"
         echo "Base de données $bdd créée"
 
-        mysql -u root -p'root' -e "CREATE USER '$user'@'$host' IDENTIFIED BY '$mdp';"
+        mysql -u root -p'root' -e "CREATE USER IF NOT EXISTS '$user'@'$host' IDENTIFIED BY '$mdp';"
         echo "Utilisateur $user créé"
 
         mysql -u root -p'root' -e "GRANT ALL PRIVILEGES ON $bdd.* TO '$user'@'$host';"
@@ -130,4 +132,5 @@ elif [ "$choix" = 3 ]; then
     chown -R www-data:www-data /var/www/html/glpi/files/_log
     #cd /var/www/html/glpi/
     #php bin/console system:check_requirements
+    echo "Installation terminée, maintenant sur http://$hote/glpi !"
 fi
