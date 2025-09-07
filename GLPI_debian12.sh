@@ -34,7 +34,7 @@ EOF
     read -p "Entre le mot de passe de l'utilisateur: " mdp
 
     mysql -u root -p'root' -e "CREATE DATABASE IF NOT EXISTS $bdd;"
-    mysql -u root -p'root' -e "CREATE USER  IF NOT EXISTS '$utilisateur'@'localhost' IDENTIFIED BY '$mdp';"
+    mysql -u root -p'root' -e "CREATE USER IF NOT EXISTS '$utilisateur'@'localhost' IDENTIFIED BY '$mdp';"
     mysql -u root -p'root' -e "GRANT ALL PRIVILEGES ON $bdd.* TO '$utilisateur'@'$hote';"
     mysql -u root -p'root' -e "FLUSH PRIVILEGES"
 
@@ -77,9 +77,9 @@ EOF
 
     read -p "Souhaitez-vous créer un utilisateur ? [o/n] " choix
     if [ "$choix" = "o" ]; then
-        read -p "Entre le nom ou l'adresse IP de l'hôte : " host
-        read -p "Entrez le nom de l'utilisateur, ainsi que son hôte (@) : " user
+        read -p "Entrez le nom de l'utilisateur : " user
         read -p "Entrez le mot de passe de l'utilisateur : " mdp
+        read -p "Entre le nom ou l'adresse IP de l'hôte : " host
         read -p "Entrez le nom de la base de donnee : " bdd
 
         mysql -u root -p'root' -e "CREATE DATABASE IF NOT EXISTS $bdd;"
