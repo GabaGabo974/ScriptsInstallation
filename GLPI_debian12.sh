@@ -79,7 +79,7 @@ EOF
     if [ "$choix" = "o" ]; then
         read -p "Entrez le nom de l'utilisateur : " user
         read -p "Entrez le mot de passe de l'utilisateur : " mdp
-        read -p "Entre le nom ou l'adresse IP de l'hôte : " host
+        read -p "Entrez le nom ou l'adresse IP de l'hôte de l'utilisateur : " host
         read -p "Entrez le nom de la base de donnee : " bdd
 
         mysql -u root -p'root' -e "CREATE DATABASE IF NOT EXISTS $bdd;"
@@ -117,9 +117,9 @@ elif [ "$choix" = 3 ]; then
     rm glpi-10.0.18.tgz -Rf
     systemctl restart apache2
 
-    read -p "Entre l'adresse IP de l'hôte de la base de donnée (localhost si en local) : " hote
+    read -p "Entre l'adresse IP de l'hôte de la base de donnée : " hote
     read -p "Entre le nom de la base de données: " bdd
-    read -p "Entre l'utilisateur : " utilisateur
+    read -p "Entre le nom de l'utilisateur : " utilisateur
     read -p "Entre le mot de passe de l'utilisateur: " mdp
 
 
