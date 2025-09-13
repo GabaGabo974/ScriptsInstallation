@@ -28,7 +28,8 @@ if [ "$choix" = "1" ]; then
     y
 EOF
     sed -i 's/bind-address = 127\.0\.0\.1/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
-
+    systemctl restart mariadb
+    
     hote=localhost
     read -p "Entre le nom de la base de données: " bdd
     read -p "Entre l'utilisateur : " utilisateur
