@@ -27,8 +27,6 @@ if [ "$choix" = "1" ]; then
     y
     y
 EOF
-    sudo sed -i 's/^bind-address            = 127\.0\.0\.1$/bind-address            = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
-    systemctl restart mariadb
 
     hote=localhost
     read -p "Entre le nom de la base de données: " bdd
@@ -77,6 +75,9 @@ elif [ "$choix" = 2 ]; then
     y
 EOF
 
+    sudo sed -i 's/^bind-address            = 127\.0\.0\.1$/bind-address            = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
+    systemctl restart mariadb
+    
     read -p "Souhaitez-vous créer un utilisateur ? [o/n] " choix
     if [ "$choix" = "o" ]; then
         read -p "Entrez le nom de l'utilisateur : " user
