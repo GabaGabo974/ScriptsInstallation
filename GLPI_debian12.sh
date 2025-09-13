@@ -105,15 +105,11 @@ elif [ "$choix" = 3 ]; then
     php8.2-ldap php8.2-mysql php8.2-xml php8.2-mbstring php8.2-bcmath \
     php8.2-intl php8.2-zip php8.2-bz2 php8.2-soap
 
-
-    apt update -y -qq && apt upgrade -y -qq
-    systemctl restart apache2
-
     cd /var/www/html
     wget https://github.com/glpi-project/glpi/releases/download/10.0.18/glpi-10.0.18.tgz
     tar -xzf glpi-10.0.18.tgz
-    chown -R www-data:www-data /var/www/html/glpi/files
-    chmod -R 777 /var/www/html/glpi/files
+    chown -R www-data:www-data /var/www/html/glpi/
+    chmod -R 777 /var/www/html/glpi/
     rm glpi-10.0.18.tgz -Rf
     systemctl restart apache2
 
