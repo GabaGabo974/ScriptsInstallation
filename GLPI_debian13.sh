@@ -72,6 +72,7 @@ elif [ "$choix" = 2 ]; then
     y
     y
 EOF
+    sed -i 's/bind-address = 127\.0\.0\.1/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
     read -p "Souhaitez-vous créer un utilisateur ? [o/n] " choix
     if [ "$choix" = "o" ]; then
