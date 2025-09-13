@@ -110,8 +110,8 @@ elif [ "$choix" = 3 ]; then
     cd /var/www/html
     wget https://github.com/glpi-project/glpi/releases/download/10.0.19/glpi-10.0.19.tgz
     tar -xzvf glpi-10.0.19.tgz
-    chown -R www-data:www-data /var/www/html/glpi/files
-    chmod -R 777 /var/www/html/glpi/files
+    chown -R www-data:www-data /var/www/html/glpi/
+    chmod -R 777 /var/www/html/glpi/
     rm glpi-10.0.19.tgz -Rf
     systemctl restart apache2
 
