@@ -13,7 +13,7 @@ echo "=== Mise a jour du systeme ==="
 apt update -y && apt upgrade -y
 
 echo "=== Installation LAMP & WP-CLI ==="
-apt install -y apache2 mariadb-server php php-mysql php-xml php-mbstring php-curl php-zip wget unzip tar curl
+apt install -y apache2 mariadb-server php php-mysql php-xml php-mbstring php-curl php-zip wget unzip tar curl sendmail
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
