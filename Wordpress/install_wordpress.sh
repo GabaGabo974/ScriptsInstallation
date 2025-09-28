@@ -56,5 +56,13 @@ a2ensite wordpress
 a2enmod rewrite
 systemctl reload apache2
 
-echo "=== Installation terminee ==="
-echo "Ouvrez votre navigateur sur http://$IPV4/wordpress pour finir la configuration."
+echo "=== Configuration de Wordpress ==="
+
+cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
+cd /var/www/html/wordpress/
+sed -i "s/'database_name_here'/$DB_NAME/g" wp-config.php
+sed -i "s/'username_here'/$DB_USER/g" wp-config.php
+sed -i "s/'password_here'/$DB_PASS/g" wp-config.php
+
+cd ..
+wp core install --url="http://$IPV4/wordpress" --title="TestScriptWP" --admin_user="admin" --admin_password="p@ssW0rd" --admin_email="test@machin.com" --path="wordpress"
