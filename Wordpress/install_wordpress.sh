@@ -1,29 +1,22 @@
 #!/bin/bash
 
-# =========================================
-# Script d installation automatique WordPress
-# Debian 13 - BTS SIO
-# =========================================
-
 # Variables
-DB_NAME="wordpress_db"
-DB_USER="wp_user"
-DB_PASS="wp_pass123"
+read -p "Nom de la base de données : " DB_NAME
+read -p "Nom de l'utilisateur de la base de données : " DB_USER
+read -p "Mot de passe de l'utilisateur : " DB_PASS
+
 WP_DIR="/var/www/html/wordpress"
+IPV4=$(ip -4 addr show $(ip -o link show | awk -F': ' '{print $2}' | grep -v lo | head -1) | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
 
 echo "=== Mise a jour du systeme ==="
 apt update -y && apt upgrade -y
 
-echo "=== Installation Apache, MariaDB, PHP ==="
-apt install -y apache2 mariadb-server php php-mysql php-xml php-mbstring php-curl php-zip wget unzip tar
-
-echo "=== Activation Apache ==="
-systemctl enable apache2
-systemctl start apache2
-
-echo "=== Securisation MariaDB ==="
-systemctl enable mariadb
-systemctl start mariadb
+echo "=== Installation LAMP & WP-CLI ==="
+apt install -y apache2 mariadb-server php php-mysql php-xml php-mbstring php-curl php-zip wget unzip tar curl
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
 
 # Creation BDD WordPress
 echo "=== Creation base de donnees WordPress ==="
@@ -64,4 +57,4 @@ a2enmod rewrite
 systemctl reload apache2
 
 echo "=== Installation terminee ==="
-echo "Ouvrez votre navigateur sur http://<IP_SERVEUR>/ pour finir la configuration."
+echo "Ouvrez votre navigateur sur http://$IPV4/ pour finir la configuration."
