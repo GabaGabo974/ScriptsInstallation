@@ -10,11 +10,11 @@ IPV4=$(ip -4 addr show $(ip -o link show | awk -F': ' '{print $2}' | grep -v lo 
 
 
 echo "=== Mise a jour du systeme ==="
-apt update -y && apt upgrade -y
+apt update -y -qq && apt upgrade -y -qq
 
 echo "=== Installation LAMP & WP-CLI ==="
-apt install -y apache2 mariadb-server php php-mysql php-xml php-mbstring php-curl php-zip wget unzip tar curl sendmail
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+apt install -y -qq apache2 mariadb-server php php-mysql php-xml php-mbstring php-curl php-zip wget unzip tar curl sendmail
+curl -s -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 
@@ -66,3 +66,4 @@ sed -i "s/'password_here'/'$DB_PASS'/g" wp-config.php
 
 cd ..
 sudo -u www-data bash -c "wp core install --url=\"http://$IPV4/wordpress\" --title=\"TestScriptWP\" --admin_user=\"admin\" --admin_password=\"p@ssW0rd\" --admin_email=\"test@machin.com\" --path=\"wordpress\""
+cat "Votre WordPress : $IPV4"
