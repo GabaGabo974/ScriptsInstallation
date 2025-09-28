@@ -57,4 +57,4 @@ a2enmod rewrite
 systemctl reload apache2
 
 echo "=== Installation terminee ==="
-echo "Ouvrez votre navigateur sur http://$IPV4/ pour finir la configuration."
+echo "Ouvrez votre navigateur sur http://$IPV4/wodpress pour finir la configuration."
