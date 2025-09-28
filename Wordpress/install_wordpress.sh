@@ -66,4 +66,4 @@ sed -i "s/'password_here'/'$DB_PASS'/g" wp-config.php
 
 cd ..
 sudo -u www-data bash -c "wp core install --url=\"http://$IPV4/wordpress\" --title=\"TestScriptWP\" --admin_user=\"admin\" --admin_password=\"p@ssW0rd\" --admin_email=\"test@machin.com\" --path=\"wordpress\""
-cat "Votre WordPress : $IPV4"
+echo "Votre WordPress : $IPV4/wordpress"
