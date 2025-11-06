@@ -24,4 +24,6 @@ mysql -u root <<EOF
     set global log_bin_trust_function_creators = 0;
 EOF
 
-sed -i "s/'# DBPassword='/'DBPassword=$DB_PASS'/g" /etc/zabbix/zabbix_server.conf
+sed -i "s/^#\?DBPassword=/DBPassword=$DB_PASS/g" /etc/zabbix/zabbix_server.conf
+systemctl restart zabbix-server zabbix-agent apache2
+systemctl enable zabbix-server zabbix-agent apache2
